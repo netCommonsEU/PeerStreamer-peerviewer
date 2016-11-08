@@ -4,10 +4,13 @@ PeerViewer
 PeerViewer is a web-enabled front end for the [PeerStreamer project]
 (https://github.com/netCommonsEU/PeerStreamer).
 
+For checking out the current development code:
+
+git clone -b D3.2-testing https://github.com/netCommonsEU/PeerStreamer-peerviewer
 
 ## Requirements
 
-Building PeerViewer requires the developers versions of the following libraries:
+Building PeerViewer requires the development versions of the following libraries:
 
 * glib v2.0
 * gstreamer v1.0

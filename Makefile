@@ -10,3 +10,4 @@ peerviewer:
 	go get github.com/netCommonsEU/PeerStreamer-go-ml
 	go get github.com/netCommonsEU/PeerStreamer-go-grapes
 	go build
+	mv PeerStreamer-peerviewer peerviewer
