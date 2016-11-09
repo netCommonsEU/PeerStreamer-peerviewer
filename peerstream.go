@@ -30,6 +30,7 @@ func newPStream(conn *net.UDPConn, numMediaStreams int) *pStream {
 	stream := pStream{}
 	stream.inboundConn = conn
 	stream.assemblyLifetime = 3 * time.Second
+	stream.assemblyBuffers = make(map[uint32]*psTemporalBuffer)
 	stream.rtpStreams = make([]rtpStream, numMediaStreams)
 	for i := 0; i < numMediaStreams; i++ {
 		stream.rtpStreams[0].RTP = make(chan []byte)
