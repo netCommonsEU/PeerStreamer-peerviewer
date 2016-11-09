@@ -9,5 +9,4 @@ peerviewer:
 	go get gopkg.in/alecthomas/kingpin.v2
 	go get github.com/netCommonsEU/PeerStreamer-go-ml
 	go get github.com/netCommonsEU/PeerStreamer-go-grapes
-	go build
-	mv PeerStreamer-peerviewer peerviewer
+	go build -o peerviewer
