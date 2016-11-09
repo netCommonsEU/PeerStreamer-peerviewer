@@ -65,12 +65,12 @@ this will produce an executable in the current directory named peerviewer.
 
 Create a template configuration file and save it in config.json:
 
-`peerviewer --template > config.json`
+`./peerviewer --template > config.json`
 
 config.json can be manually manipulated to suit your needs. Finally, start the
 web server with the following command:
 
-`peerviewer -c config.json`
+`./peerviewer -c config.json`
 
 At this point you should be able to reach the web application pointing your
 favorite browser at http://localhost:8080/

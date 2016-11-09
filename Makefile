@@ -15,3 +15,4 @@ peerviewer:
 # Requires sudo
 packweb:
 	cd public/ && npm install && webpack
+	${GOPATH}/bin/rice append --exec peerviewer
