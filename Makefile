@@ -1,6 +1,6 @@
 all: peerviewer
 
-peerviewer:
+peerviewer: *.go
 	go get github.com/GeertJohan/go.rice
 	go get github.com/GeertJohan/go.rice/rice
 	go get github.com/Sirupsen/logrus
