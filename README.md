@@ -34,11 +34,44 @@ export GOPATH=~/go_workspace/ # Put this in ~/.profile to make it permanent
 For up-to-date instructions refer to the [official Go documentation]
 (https://golang.org/doc/install)
 
+Finally, also Node.js development environment is required. For configuring it on
+Ubuntu (x84_64) execute the following commands:
+
+```
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+Refer to the [official Node.js documentation]
+(https://nodejs.org/en/download/package-manager/) for up-to-date instructions.
+
 ## Build
+
+We recommend using the [PeerStreamer build system]
+(https://github.com/netCommonsEU/PeerStreamer-build).
+
+### Manual build
 
 Just execute:
 
-`make`
+```
+make
+make packweb
+```
 
 this will produce an executable in the current directory named peerviewer.
+
+## Basic Usage
+
+Create a template configuration file and save it in config.json:
+
+`peerviewer --template > config.json`
+
+config.json can be manually manipulated to suit your needs. Finally, start the
+web server with the following command:
+
+`peerviewer -c config.json`
+
+At this point you should be able to reach the web application pointing your
+favorite browser at http://localhost:8080/
 

@@ -2,6 +2,7 @@ all: peerviewer
 
 peerviewer:
 	go get github.com/GeertJohan/go.rice
+	go get github.com/GeertJohan/go.rice/rice
 	go get github.com/Sirupsen/logrus
 	go get github.com/gorilla/mux
 	go get github.com/ziutek/glib
@@ -10,3 +11,7 @@ peerviewer:
 	go get github.com/netCommonsEU/PeerStreamer-go-ml
 	go get github.com/netCommonsEU/PeerStreamer-go-grapes
 	go build -o peerviewer
+
+# Requires sudo
+packweb:
+	cd public/ && npm install && webpack

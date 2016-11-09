@@ -14,7 +14,7 @@ const isTest = NODE_ENV === 'test';
 
 // devServer config
 const devHost   = process.env.HOST || 'localhost';
-const devPort   = process.env.PORT || 3000;
+const devPort   = process.env.PORT || 8080;
 
 const setPublicPath = process.env.SET_PUBLIC_PATH !== 'false';
 const publicPath  = (isDev && setPublicPath) ? `//${devHost}:${devPort}/` : '/';
