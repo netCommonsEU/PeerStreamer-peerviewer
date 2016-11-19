@@ -83,17 +83,17 @@ var configDefault = configRoot{
 			Description: "Audio Test",
 			Listen:      ":60006",
 			Kind:        configStreamKindString{Value: configStreamKindAudioTest1},
-		}},
+		},
 		configStream{
 			Description: "WebM",
 			Listen:      ":60007",
 			Kind:        configStreamKindString{Value: configStreamKindVideoWebM},
-		}},
+		},
 		configStream{
 			Description: "Video Only",
 			Listen:      ":60008",
 			Kind:        configStreamKindString{Value: configStreamKindVideoVP8},
-		}},
+		},
 		configStream{
 			Description: "Audio Only",
 			Listen:      ":60009",
