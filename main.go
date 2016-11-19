@@ -84,7 +84,10 @@ func initPeerStreams(streamConfig []configStream) error {
 		var numMediaStreams int
 		switch cfg.Kind.Value {
 		case configStreamKindVideoWebM:
+			//numMediaStreams = 2
 			numMediaStreams = 2
+		case configStreamKindVideoVP8:
+			numMediaStreams = 1
 		case configStreamKindAudioOpus:
 			numMediaStreams = 1
 		case configStreamKindAudioTest1:
@@ -105,7 +108,11 @@ func initGPipelines(streamConfig []configStream) {
 		var p gPipeline
 		switch cfg.Kind.Value {
 		case configStreamKindVideoWebM:
-			// not implemented
+			p = newGPipelineVideoWebm(i)
+			go p.ListenForData(peerStreams[i].RTPStreams())
+		case configStreamKindVideoVP8:
+			p = newGPipelineVideoVP8(i)
+			go p.ListenForData(peerStreams[i].RTPStreams())
 		case configStreamKindAudioOpus:
 			p = newGPipelineAudioOpus(i)
 			go p.ListenForData(peerStreams[i].RTPStreams())

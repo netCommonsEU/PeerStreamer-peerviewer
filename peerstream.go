@@ -10,8 +10,8 @@ import (
 )
 
 type rtpStream struct {
-	RTP  chan []byte
-	RTCP chan []byte
+	RTP  chan []uint8
+	RTCP chan []uint8
 }
 
 type psTemporalBuffer struct {
@@ -33,8 +33,8 @@ func newPStream(conn *net.UDPConn, numMediaStreams int) *pStream {
 	stream.assemblyBuffers = make(map[uint32]*psTemporalBuffer)
 	stream.rtpStreams = make([]rtpStream, numMediaStreams)
 	for i := 0; i < numMediaStreams; i++ {
-		stream.rtpStreams[0].RTP = make(chan []byte)
-		stream.rtpStreams[0].RTCP = make(chan []byte)
+		stream.rtpStreams[i].RTP = make(chan []byte)
+		stream.rtpStreams[i].RTCP = make(chan []byte)
 	}
 	return &stream
 }
@@ -149,17 +149,46 @@ func (s *pStream) handleRTPEnvelopes(chunk *grapes.Chunk) {
 }
 
 func (s *pStream) dispatchRTPPackets(env *grapes.RTPEnvelope) {
-	if int(env.StreamID) >= len(s.rtpStreams)/2 {
-		logger.WithFields(log.Fields{
-			"stream": env.StreamID,
-		}).Warn("Unknown stream ID")
+	/*
+	 * WARNING: Streams management still incomplete.
+	 * For now we assume two scenarios:
+	 * 1) sigle stream: only audio (OPUS) or only video (VP8)
+	 * 2) video + audio streams: video identified by env.StreamID == 2
+	 * and audio identified by env.StreamID == 1 (We assume the RTP chunkiser works in this way).
+	 * we push audio RTP/RTCP packets in s.rtpStreams[0] and video
+	 * RTP/RTCP packets in s.rtpStreams[1].
+	 *
+	 * TODO: modify the application logic for dynamix stream management without
+	 * assumption about how the RTP chunkiser works.
+	 */
+	var stream rtpStream
+	logger.Info("StreamID/rtsStreams ", int(env.StreamID), len(s.rtpStreams))
+	if len(s.rtpStreams) == 1 {
+		stream = s.rtpStreams[0]
+	} else if len(s.rtpStreams) == 2 {
+		if env.StreamID == 2 || env.StreamID == 3 {
+			logger.Info("Video")
+			stream = s.rtpStreams[1]
+		} else if env.StreamID == 0 || env.StreamID == 1 {
+			logger.Info("Audio")
+			stream = s.rtpStreams[0]
+		} else {
+			logger.WithFields(log.Fields{"stream": env.StreamID,
+				}).Warn("Unknown stream ID")
+			return
+		}
+	} else {
+		logger.WithFields(log.Fields{"stream": env.StreamID,
+			}).Warn("Unknown stream ID")
+		//stream = s.rtpStreams[env.StreamID/2]
 		return
 	}
-	stream := s.rtpStreams[env.StreamID/2]
 	rtp := env.StreamID%2 == 0
 	if rtp {
+		logger.Info("Dispatch RTP ", len(env.Content))
 		stream.RTP <- env.Content
 	} else {
+		logger.Info("Dispatch RTCP ", len(env.Content))
 		stream.RTCP <- env.Content
 	}
 }

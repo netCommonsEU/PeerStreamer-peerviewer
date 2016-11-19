@@ -78,6 +78,8 @@ func httpHandleAPIStreams(router *mux.Router) func(w http.ResponseWriter, r *htt
 			switch v.Kind.Value {
 			case configStreamKindVideoWebM:
 				s.MediaType = "video"
+			case configStreamKindVideoVP8:
+				s.MediaType = "video"
 			case configStreamKindAudioOpus:
 				s.MediaType = "audio"
 			case configStreamKindAudioTest1:

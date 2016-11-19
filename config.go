@@ -30,6 +30,7 @@ type configStreamKindString struct {
 
 const (
 	configStreamKindVideoWebM configStreamKind = iota
+	configStreamKindVideoVP8
 	configStreamKindAudioOpus
 	configStreamKindAudioTest1
 	configStreamKindVideoTest1
@@ -40,6 +41,7 @@ var errConfigInvalidStreamKind = errors.New("config: invalid stream kind")
 func (s configStreamKindString) MarshalJSON() ([]byte, error) {
 	m := map[configStreamKind][]byte{
 		configStreamKindVideoWebM:  []byte(`"video-webm"`),
+		configStreamKindVideoVP8:  []byte(`"video-vp8"`),
 		configStreamKindAudioOpus:  []byte(`"audio-opus"`),
 		configStreamKindAudioTest1: []byte(`"audio-test1"`),
 		configStreamKindVideoTest1: []byte(`"video-test1"`),
@@ -54,6 +56,7 @@ func (s configStreamKindString) MarshalJSON() ([]byte, error) {
 func (s *configStreamKindString) UnmarshalJSON(value []byte) error {
 	m := map[string]configStreamKind{
 		`"video-webm"`:  configStreamKindVideoWebM,
+		`"video-vp8"`:  configStreamKindVideoVP8,
 		`"audio-opus"`:  configStreamKindAudioOpus,
 		`"audio-test1"`: configStreamKindAudioTest1,
 		`"video-test1"`: configStreamKindVideoTest1,
@@ -72,13 +75,28 @@ var configDefault = configRoot{
 	},
 	Streams: []configStream{
 		configStream{
-			Description: "Channel 1",
-			Listen:      ":60006",
-			Kind:        configStreamKindString{Value: configStreamKindVideoWebM},
+			Description: "Video Test",
+			Listen:      ":60005",
+			Kind:        configStreamKindString{Value: configStreamKindVideoTest1},
 		},
 		configStream{
-			Description: "Radio 1",
+			Description: "Audio Test",
+			Listen:      ":60006",
+			Kind:        configStreamKindString{Value: configStreamKindAudioTest1},
+		}},
+		configStream{
+			Description: "WebM",
 			Listen:      ":60007",
+			Kind:        configStreamKindString{Value: configStreamKindVideoWebM},
+		}},
+		configStream{
+			Description: "Video Only",
+			Listen:      ":60008",
+			Kind:        configStreamKindString{Value: configStreamKindVideoVP8},
+		}},
+		configStream{
+			Description: "Audio Only",
+			Listen:      ":60009",
 			Kind:        configStreamKindString{Value: configStreamKindAudioOpus},
 		}},
 }
