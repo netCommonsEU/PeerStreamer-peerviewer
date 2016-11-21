@@ -41,6 +41,7 @@ Ubuntu (x84_64) execute the following commands:
 ```
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
+sudo npm install webpack -g
 ```
 
 Refer to the [official Node.js documentation]
