@@ -18,7 +18,7 @@ Building PeerViewer requires the development versions of the following libraries
 
 On ubuntu they can be installed with the following command:
 
-`sudo apt-get install libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev`
+`sudo apt-get install libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad`
 
 Building PeerViewer also requires a properly configured Go development
 environment. On Ubuntu (x86_64) it is possible to install and configure the go
