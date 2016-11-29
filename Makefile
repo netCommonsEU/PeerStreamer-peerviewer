@@ -16,3 +16,20 @@ peerviewer: *.go
 packweb:
 	cd public/ && npm install && webpack
 	${GOPATH}/bin/rice append --exec peerviewer
+
+install:
+	mkdir -p /opt/peerstreamer
+ifneq (,$(wildcard peerviewer))
+	cp peerviewer /opt/peerstreamer/
+	ln -f -s /opt/peerstreamer/peerviewer  /usr/local/bin/peerviewer
+endif
+
+uninstall:
+ifneq (,$(wildcard /usr/local/bin/peerviewer))
+	rm -f /usr/local/bin/peerviewer
+	rm -f /opt/peerstreamer/peerviewer
+endif
+ifneq (,$(wildcard /opt/peerstreamer))
+	rm -rf /opt/peerstreamer
+endif
+
