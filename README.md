@@ -8,6 +8,11 @@ For checking out the current development code:
 
 git clone -b D3.2-testing https://github.com/netCommonsEU/PeerStreamer-peerviewer
 
+>### *PeerViewer on Raspberry Pi 2/3*
+Building and installing PeerViewer on Raspberry Pi 2/3 requires a different
+procedure than the one described below. The instructions for using PeerViewer on
+Raspberry Pi 2/3 are reported [here](docs/raspberry_build.md).
+
 ## Requirements
 
 Building PeerViewer requires the development versions of the following libraries:
@@ -15,6 +20,9 @@ Building PeerViewer requires the development versions of the following libraries
 * glib v2.0
 * gstreamer v1.0
 * libgstreamer-plugins-base1.0-dev
+
+>### *NOTE*
+PeerViewer requires GStreamer v1.8 or higher.
 
 On ubuntu they can be installed with the following command:
 
@@ -62,6 +70,16 @@ make packweb
 ```
 
 this will produce an executable in the current directory named peerviewer.
+
+## Install/Uninstall
+
+For installing execute:
+
+`make install`
+
+For uninstalling execute:
+
+`make uninstall`
 
 ## Basic Usage
 
