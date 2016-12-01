@@ -26,13 +26,15 @@ PeerViewer requires GStreamer v1.8 or higher.
 
 On ubuntu they can be installed with the following command:
 
-`sudo apt-get install libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad`
+```bash
+sudo apt-get install libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
+```
 
 Building PeerViewer also requires a properly configured Go development
 environment. On Ubuntu (x86_64) it is possible to install and configure the go
 development environment with the following commands:
 
-```
+```bash
 wget https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.7.3.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin # Put this in ~/.profile to make it permanent
@@ -46,7 +48,7 @@ For up-to-date instructions refer to the [official Go documentation]
 Finally, also Node.js development environment is required. For configuring it on
 Ubuntu (x84_64) execute the following commands:
 
-```
+```bash
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install webpack -g
@@ -64,7 +66,7 @@ We recommend using the [PeerStreamer build system]
 
 Just execute:
 
-```
+```bash
 make
 make packweb
 ```

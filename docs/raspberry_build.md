@@ -14,26 +14,29 @@ procedure, don't do this on a production node.
 
 Add the Stretch repository to the repositories source list:
 
-`echo 'deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi' | sudo tee -a /etc/apt/sources.list`
+```bash
+echo 'deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi' | sudo tee -a /etc/apt/sources.list
+```
 
 Update the repositories cache and upgrade all the packages (be aware that this
 can take a long time):
 
-```
+```bash
 sudo apt-get update
 sudo apt-get --with-new-pkgs upgrade
 ```
 
 Install the PeerViewer specific requirements:
 
-`sudo apt-get install libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad git zip
-`
+```bash
+sudo apt-get install libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad git zip
+```
 
 ### Set up the Go development environment
 
 This is not different that the standard procedure for installing Go:
 
-```
+```bash
 wget https://storage.googleapis.com/golang/go1.7.3.linux-armv6l.tar.gz
 sudo tar -C /usr/local -xzf go1.7.3.linux-armv6l.tar.gz
 export PATH=$PATH:/usr/local/go/bin # Put this in ~/.profile to make it permanent
@@ -48,7 +51,7 @@ For up-to-date instructions refer to the [official Godocumentation] (https://gol
 
 Install Node.js and webpack:
 
-```
+```bash
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install webpack -g
@@ -56,7 +59,7 @@ sudo npm install webpack -g
 
 Install PhantomJS for ARM architecture:
 
-```
+```bash
 sudo apt-get install libfontconfig1 libfreetype6 libpng12-0
 curl -o /tmp/phantomjs -sSL
 https://github.com/fg2it/phantomjs-on-raspberry/releases/download/v2.1.1-wheezy-jessie/phantomjs
@@ -68,7 +71,7 @@ sudo chmod a+x /usr/local/bin/phantomjs
 
 For building and installing PeerViewer execute the following commands:
 
-```
+```bash
 git clone -b D3.2-testing --depth 1 https://github.com/netCommonsEU/PeerStreamer-peerviewer
 cd PeerStreamer-peerviewer
 make
